@@ -1,22 +1,12 @@
-document.addEventListener('DOMContentLoaded', function() {
-  var analyzePageButton = document.getElementById('analyze');
-  analyzePageButton.addEventListener('click', function() {
-    
-    // Chrome JS APIs dùng để get các thông tin của selected tab
-    chrome.tabs.getSelected(null, function(tab) {
-      d = document;
+//document.getElementById("demo").onclick = function() {myFunction()};
+myFunction();
+function myFunction() {
 
-      var f = d.createElement('form');
-      // action này vào trang https://gtmetrix.com/, bật f12 lên tìm form để lấy
-      f.action = 'http://gtmetrix.com/analyze.html?bm';
-      f.method = 'post';
-      var i = d.createElement('input');
-      i.type = 'hidden';
-      i.name = 'url';
-      i.value = tab.url;
-      f.appendChild(i);
-      d.body.appendChild(f);
-      f.submit();
-    });
-  }, false);
-}, false);
+ console.log("popup.js > run.js");
+ chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+  chrome.tabs.sendMessage(tabs[0].id, {greeting:"hello" }, function(response) {
+   console.log(response.farewell);
+   document.getElementById("url").innerHTML = response.farewell;
+  });
+ });
+}
