@@ -48,7 +48,9 @@ function getData(url){
 	      var html = parser.parseFromString(output, "text/html");
 	      
 	      var elements = html.querySelectorAll('span.a-size-base.review-text');
-	      console.log(elements[0].innerText +" ");
+	      for(i = 0; i < elements.length; i++){
+	      	console.log(elements[i].innerText);
+	      }
 	    }
 	};
 }
